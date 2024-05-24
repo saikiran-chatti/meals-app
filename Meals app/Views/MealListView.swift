@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// View for displaying a list of meals.
 struct MealListView: View {
     @StateObject private var viewModel = DessertListViewModel()
     
@@ -25,7 +26,7 @@ struct MealListView: View {
                 .padding()
             }
             .navigationTitle("Desserts")
-            .navigationBarTitleDisplayMode(.inline) // Set the title display mode to inline
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewModel.fetchDesserts()
             }

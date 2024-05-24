@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// View for displaying detailed information about a specific meal.
 struct MealDetailView: View {
     let mealID: String
     @StateObject private var viewModel = MealDetailViewModel()

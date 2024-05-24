@@ -7,12 +7,14 @@
 import Foundation
 import Combine
 
+/// Singleton service for handling API requests.
 class APIService {
     static let shared = APIService()
     private init() {}
     
     private let baseURL = "https://www.themealdb.com/api/json/v1/1/"
     
+    /// Fetches the list of desserts.
     func fetchDesserts() -> AnyPublisher<[Dessert], Error> {
         let url = URL(string: "\(baseURL)filter.php?c=Dessert")!
         return URLSession.shared.dataTaskPublisher(for: url)
@@ -22,6 +24,7 @@ class APIService {
             .eraseToAnyPublisher()
     }
     
+    /// Fetches the detailed information for a specific meal by its ID.
     func fetchMealDetail(by id: String) -> AnyPublisher<MealDetail, Error> {
         let url = URL(string: "\(baseURL)lookup.php?i=\(id)")!
         return URLSession.shared.dataTaskPublisher(for: url)

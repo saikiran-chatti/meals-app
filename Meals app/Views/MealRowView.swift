@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// View for displaying a single row of meal information.
 struct MealRowView: View {
     let meal: MealDetail
     

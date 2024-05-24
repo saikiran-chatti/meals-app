@@ -14,7 +14,7 @@ struct IdentifiableError: Identifiable {
     let message: String
 }
 
-
+/// ViewModel for managing the list of desserts.
 class DessertListViewModel: ObservableObject {
     @Published var meals: [MealDetail] = []
     @Published var isLoading = false
@@ -22,6 +22,7 @@ class DessertListViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    /// Fetches the list of desserts and their detailed information.
     func fetchDesserts() {
         isLoading = true
         errorMessage = nil

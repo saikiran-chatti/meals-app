@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Main entry point for the Meals app.
 @main
 struct Meals_appApp: App {
     var body: some Scene {

@@ -6,10 +6,12 @@
 //
 import Foundation
 
+/// Response model for a list of desserts.
 struct DessertListResponse: Codable {
     let meals: [Dessert]
 }
 
+/// Model representing a single dessert.
 struct Dessert: Codable, Identifiable {
     let id: String
     let name: String
@@ -24,10 +26,12 @@ struct Dessert: Codable, Identifiable {
     }
 }
 
+/// Response model for meal details.
 struct MealDetailResponse: Codable {
     let meals: [MealDetail]
 }
 
+/// Model representing detailed information about a meal.
 struct MealDetail: Codable, Identifiable {
     let id: String
     let name: String
@@ -84,6 +88,7 @@ struct MealDetail: Codable, Identifiable {
         case measure20 = "strMeasure20"
     }
     
+    /// Custom initializer to decode meal details from JSON.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
@@ -105,6 +110,7 @@ struct MealDetail: Codable, Identifiable {
         self.ingredients = ingredients
     }
 
+    /// Custom encoder to encode meal details to JSON.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
