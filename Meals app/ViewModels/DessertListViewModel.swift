@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+/// Identifiable error for displaying error messages in alerts.
 struct IdentifiableError: Identifiable {
     let id = UUID() // Ensures each instance has a unique identifier
     let message: String
@@ -28,8 +29,17 @@ class DessertListViewModel: ObservableObject {
         errorMessage = nil
         APIService.shared.fetchDesserts()
             .flatMap { meals in
-                Publishers.MergeMany(meals.map { APIService.shared.fetchMealDetail(by: $0.id) })
-                    .collect()
+                Publishers.MergeMany(meals.map { meal in
+                    APIService.shared.fetchMealDetail(by: meal.id)
+                        .tryMap { mealDetail -> MealDetail in
+                            mealDetail
+                        }
+                        .catch { error -> Empty<MealDetail, Never> in
+                            print("Failed to fetch details for meal \(meal.id): \(error.localizedDescription)")
+                            return Empty()
+                        }
+                })
+                .collect()
             }
             .map { detailedMeals in
                 detailedMeals.sorted(by: { $0.name < $1.name }) // Sort meals by name
@@ -46,7 +56,6 @@ class DessertListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 }
-
 
 
 
