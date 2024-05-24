@@ -15,15 +15,10 @@ struct MealListView: View {
         NavigationView {
             ScrollView {
                 VStack {
-                    ForEach(viewModel.desserts) { dessert in
-                        if let mealID = dessert.id as String?, let _ = dessert.thumbnail {
-                            NavigationLink(destination: MealDetailView(mealID: mealID)) {
-                                MealRowView(dessert: dessert)
-                                    .background(Color.white)
-                                    .cornerRadius(10)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
-                                    .padding(.vertical, 5) // Add vertical padding to create gap between cards
-                            }
+                    ForEach(viewModel.meals) { meal in
+                        NavigationLink(destination: MealDetailView(mealID: meal.id)) {
+                            MealRowView(meal: meal)
+                                .padding(.horizontal)
                         }
                     }
                 }
@@ -40,3 +35,4 @@ struct MealListView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
+

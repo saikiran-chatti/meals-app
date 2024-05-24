@@ -16,7 +16,7 @@ struct IdentifiableError: Identifiable {
 
 
 class DessertListViewModel: ObservableObject {
-    @Published var desserts: [Dessert] = []
+    @Published var meals: [MealDetail] = []
     @Published var isLoading = false
     @Published var errorMessage: IdentifiableError? = nil
     
@@ -26,17 +26,26 @@ class DessertListViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         APIService.shared.fetchDesserts()
+            .flatMap { meals in
+                Publishers.MergeMany(meals.map { APIService.shared.fetchMealDetail(by: $0.id) })
+                    .collect()
+            }
+            .map { detailedMeals in
+                detailedMeals.sorted(by: { $0.name < $1.name }) // Sort meals by name
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.errorMessage = IdentifiableError(message: error.localizedDescription)
                 }
-            }, receiveValue: { desserts in
-                self.desserts = desserts.filter { $0.id != "" && $0.name != "" }
+            }, receiveValue: { sortedMeals in
+                self.meals = sortedMeals
             })
             .store(in: &cancellables)
     }
 }
+
+
 
 

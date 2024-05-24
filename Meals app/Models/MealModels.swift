@@ -31,13 +31,17 @@ struct MealDetailResponse: Codable {
 struct MealDetail: Codable, Identifiable {
     let id: String
     let name: String
+    let area: String?
     let instructions: String
+    let thumbnail: URL?
     let ingredients: [String: String]
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"
         case name = "strMeal"
+        case area = "strArea"
         case instructions = "strInstructions"
+        case thumbnail = "strMealThumb"
         case ingredient1 = "strIngredient1"
         case ingredient2 = "strIngredient2"
         case ingredient3 = "strIngredient3"
@@ -84,14 +88,15 @@ struct MealDetail: Codable, Identifiable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
+        area = try container.decodeIfPresent(String.self, forKey: .area)
         instructions = try container.decode(String.self, forKey: .instructions)
+        thumbnail = try container.decodeIfPresent(URL.self, forKey: .thumbnail)
         
         var ingredients = [String: String]()
         for i in 1...20 {
-            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")
-            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")
-            if let ingredientKey = ingredientKey, let measureKey = measureKey,
-               let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey),
+            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")!
+            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")!
+            if let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey),
                let measure = try container.decodeIfPresent(String.self, forKey: measureKey),
                !ingredient.isEmpty {
                 ingredients[ingredient] = measure
@@ -99,7 +104,7 @@ struct MealDetail: Codable, Identifiable {
         }
         self.ingredients = ingredients
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)

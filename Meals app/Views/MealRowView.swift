@@ -9,26 +9,26 @@ import Foundation
 import SwiftUI
 
 struct MealRowView: View {
-    let dessert: Dessert
+    let meal: MealDetail
     
     var body: some View {
         HStack {
-            if let thumbnail = dessert.thumbnail {
+            if let thumbnail = meal.thumbnail {
                 AsyncImage(url: thumbnail) { image in
                     image.resizable()
                 } placeholder: {
                     ProgressView()
                 }
                 .frame(width: 50, height: 50)
-                .clipShape(Circle()) // Change to Circle to match the image style
+                .clipShape(Circle())
                 .padding(.trailing, 10)
             }
             
             VStack(alignment: .leading) {
-                Text(dessert.name)
+                Text(meal.name)
                     .font(.headline)
-                if let area = dessert.area, !area.isEmpty {
-                    Text(area) // Display the area
+                if let area = meal.area, !area.isEmpty {
+                    Text(area)
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 } else {
@@ -42,14 +42,15 @@ struct MealRowView: View {
         }
         .padding()
         .background(Color.white)
-//        .cornerRadius(10)
-//        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
-        .padding(.vertical, 5) // Add vertical padding to create gap between cards
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+        .padding(.vertical, 5)
         .onAppear {
-            print("Dessert: \(dessert.name), Area: \(String(describing: dessert.area))")
+            print("Meal: \(meal.name), Area: \(String(describing: meal.area))")
         }
     }
 }
+
 
 
 
