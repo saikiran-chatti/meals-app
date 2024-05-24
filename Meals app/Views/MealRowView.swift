@@ -27,6 +27,7 @@ struct MealRowView: View {
             VStack(alignment: .leading) {
                 Text(meal.name)
                     .font(.headline)
+                    .foregroundColor(.black)
                 if let area = meal.area, !area.isEmpty {
                     Text(area)
                         .font(.subheadline)

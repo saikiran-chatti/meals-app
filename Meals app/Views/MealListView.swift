@@ -25,6 +25,7 @@ struct MealListView: View {
                 .padding()
             }
             .navigationTitle("Desserts")
+            .navigationBarTitleDisplayMode(.inline) // Set the title display mode to inline
             .onAppear {
                 viewModel.fetchDesserts()
             }
