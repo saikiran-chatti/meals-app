@@ -20,6 +20,7 @@ struct MealListView: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
             .navigationTitle("Desserts")
             .onAppear {
                 viewModel.fetchDesserts()
@@ -30,5 +31,4 @@ struct MealListView: View {
         }
     }
 }
-
 

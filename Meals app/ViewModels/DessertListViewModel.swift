@@ -14,6 +14,7 @@ struct IdentifiableError: Identifiable {
     let message: String
 }
 
+
 class DessertListViewModel: ObservableObject {
     @Published var desserts: [Dessert] = []
     @Published var isLoading = false
@@ -32,8 +33,10 @@ class DessertListViewModel: ObservableObject {
                     self.errorMessage = IdentifiableError(message: error.localizedDescription)
                 }
             }, receiveValue: { desserts in
-                self.desserts = desserts.filter { $0.id != "" && $0.name != "" && $0.thumbnail != nil }
+                self.desserts = desserts.filter { $0.id != "" && $0.name != "" }
             })
             .store(in: &cancellables)
     }
 }
+
+

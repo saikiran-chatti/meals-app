@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MealRowView: View {
     let dessert: Dessert
-
+    
     var body: some View {
         HStack {
             if let thumbnail = dessert.thumbnail {
@@ -20,12 +20,29 @@ struct MealRowView: View {
                     ProgressView()
                 }
                 .frame(width: 50, height: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(Circle()) // Change to Circle to match the image style
+                .padding(.trailing, 10)
             }
             
-            Text(dessert.name)
-                .font(.headline)
+            VStack(alignment: .leading) {
+                Text(dessert.name)
+                    .font(.headline)
+                if let area = dessert.area {
+                    Text(area) // Display the area
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            
+            Spacer()
+            
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+        .padding(.vertical, 5) // Add vertical padding to create gap between cards
     }
 }
+
 
