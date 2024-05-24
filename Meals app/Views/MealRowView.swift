@@ -27,22 +27,29 @@ struct MealRowView: View {
             VStack(alignment: .leading) {
                 Text(dessert.name)
                     .font(.headline)
-                if let area = dessert.area {
+                if let area = dessert.area, !area.isEmpty {
                     Text(area) // Display the area
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                } else {
+                    Text("No Area Info") // Debugging text
+                        .font(.subheadline)
+                        .foregroundColor(.red)
                 }
             }
             
             Spacer()
-            
         }
         .padding()
         .background(Color.white)
-        .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+//        .cornerRadius(10)
+//        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
         .padding(.vertical, 5) // Add vertical padding to create gap between cards
+        .onAppear {
+            print("Dessert: \(dessert.name), Area: \(String(describing: dessert.area))")
+        }
     }
 }
+
 
 

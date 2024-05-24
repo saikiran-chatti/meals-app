@@ -46,7 +46,6 @@ struct MealDetailView: View {
         .onAppear {
             viewModel.fetchMealDetail(id: mealID)
         }
-        .navigationTitle("Meal Detail")
     }
 }
 
