@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Foundation
 
 struct DessertListResponse: Codable {
     let meals: [Dessert]
@@ -14,7 +15,7 @@ struct DessertListResponse: Codable {
 struct Dessert: Codable, Identifiable {
     let id: String
     let name: String
-    let thumbnail: URL
+    let thumbnail: URL?
     
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"
@@ -37,7 +38,9 @@ struct MealDetail: Codable, Identifiable {
         case id = "idMeal"
         case name = "strMeal"
         case instructions = "strInstructions"
-        case ingredients
+        case ingredient1 = "strIngredient1"
+        case measure1 = "strMeasure1"
+        // Add other ingredient and measure keys up to 20 as needed
     }
     
     init(from decoder: Decoder) throws {
@@ -48,11 +51,11 @@ struct MealDetail: Codable, Identifiable {
         
         var ingredients = [String: String]()
         for i in 1...20 {
-            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")!
-            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")!
-            let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey) ?? ""
-            let measure = try container.decodeIfPresent(String.self, forKey: measureKey) ?? ""
-            if !ingredient.isEmpty {
+            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")
+            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")
+            if let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey),
+               let measure = try container.decodeIfPresent(String.self, forKey: measureKey),
+               !ingredient.isEmpty {
                 ingredients[ingredient] = measure
             }
         }

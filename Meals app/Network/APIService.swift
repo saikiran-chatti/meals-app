@@ -19,7 +19,10 @@ class APIService {
         return URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: DessertListResponse.self, decoder: JSONDecoder())
-            .map { $0.meals.sorted(by: { $0.name < $1.name }) }
+            .map { response in
+                response.meals.filter { $0.id != "" && $0.name != "" && $0.thumbnail != nil }
+            }
+            .map { $0.sorted(by: { $0.name < $1.name }) }
             .eraseToAnyPublisher()
     }
     

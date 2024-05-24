@@ -15,10 +15,12 @@
 		33C6E3A22C0024C700C63170 /* Meals_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3A12C0024C700C63170 /* Meals_appUITests.swift */; };
 		33C6E3A42C0024C700C63170 /* Meals_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3A32C0024C700C63170 /* Meals_appUITestsLaunchTests.swift */; };
 		33C6E3B42C002DE500C63170 /* MealModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3B32C002DE500C63170 /* MealModels.swift */; };
-		33C6E3B62C002DF000C63170 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3B52C002DF000C63170 /* NetworkManager.swift */; };
 		33C6E3B82C002DFC00C63170 /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3B72C002DFC00C63170 /* MealListView.swift */; };
 		33C6E3BA2C002E0500C63170 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3B92C002E0500C63170 /* MealDetailView.swift */; };
 		33C6E3BC2C002E0F00C63170 /* MealRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3BB2C002E0F00C63170 /* MealRowView.swift */; };
+		33C6E3BF2C00339E00C63170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3BE2C00339E00C63170 /* APIService.swift */; };
+		33C6E3C22C0034CB00C63170 /* DessertListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3C12C0034CB00C63170 /* DessertListViewModel.swift */; };
+		33C6E3C62C00359400C63170 /* MealDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E3C52C00359400C63170 /* MealDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,10 +52,12 @@
 		33C6E3A12C0024C700C63170 /* Meals_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meals_appUITests.swift; sourceTree = "<group>"; };
 		33C6E3A32C0024C700C63170 /* Meals_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meals_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		33C6E3B32C002DE500C63170 /* MealModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModels.swift; sourceTree = "<group>"; };
-		33C6E3B52C002DF000C63170 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		33C6E3B72C002DFC00C63170 /* MealListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
 		33C6E3B92C002E0500C63170 /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
 		33C6E3BB2C002E0F00C63170 /* MealRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowView.swift; sourceTree = "<group>"; };
+		33C6E3BE2C00339E00C63170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		33C6E3C12C0034CB00C63170 /* DessertListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertListViewModel.swift; sourceTree = "<group>"; };
+		33C6E3C52C00359400C63170 /* MealDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,7 @@
 		33C6E3852C0024C400C63170 /* Meals app */ = {
 			isa = PBXGroup;
 			children = (
+				33C6E3C02C0033DD00C63170 /* ViewModels */,
 				33C6E3BD2C002E1E00C63170 /* Utilities */,
 				33C6E3B22C00293C00C63170 /* Views */,
 				33C6E3B12C0028EE00C63170 /* Network */,
@@ -152,7 +157,7 @@
 		33C6E3B12C0028EE00C63170 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				33C6E3B52C002DF000C63170 /* NetworkManager.swift */,
+				33C6E3BE2C00339E00C63170 /* APIService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -172,6 +177,15 @@
 			children = (
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		33C6E3C02C0033DD00C63170 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				33C6E3C12C0034CB00C63170 /* DessertListViewModel.swift */,
+				33C6E3C52C00359400C63170 /* MealDetailViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,10 +320,12 @@
 			files = (
 				33C6E3BA2C002E0500C63170 /* MealDetailView.swift in Sources */,
 				33C6E3BC2C002E0F00C63170 /* MealRowView.swift in Sources */,
-				33C6E3B62C002DF000C63170 /* NetworkManager.swift in Sources */,
+				33C6E3C22C0034CB00C63170 /* DessertListViewModel.swift in Sources */,
 				33C6E3892C0024C400C63170 /* ContentView.swift in Sources */,
 				33C6E3872C0024C400C63170 /* Meals_appApp.swift in Sources */,
 				33C6E3B42C002DE500C63170 /* MealModels.swift in Sources */,
+				33C6E3BF2C00339E00C63170 /* APIService.swift in Sources */,
+				33C6E3C62C00359400C63170 /* MealDetailViewModel.swift in Sources */,
 				33C6E3B82C002DFC00C63170 /* MealListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

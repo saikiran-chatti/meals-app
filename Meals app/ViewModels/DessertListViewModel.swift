@@ -17,7 +17,7 @@ struct IdentifiableError: Identifiable {
 class DessertListViewModel: ObservableObject {
     @Published var desserts: [Dessert] = []
     @Published var isLoading = false
-    @Published var errorMessage: IdentifiableError? = nil // Updated type
+    @Published var errorMessage: IdentifiableError? = nil
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -29,12 +29,11 @@ class DessertListViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 self.isLoading = false
                 if case .failure(let error) = completion {
-                    self.errorMessage = IdentifiableError(message: error.localizedDescription) // Updated to use IdentifiableError
+                    self.errorMessage = IdentifiableError(message: error.localizedDescription)
                 }
             }, receiveValue: { desserts in
-                self.desserts = desserts
+                self.desserts = desserts.filter { $0.id != "" && $0.name != "" && $0.thumbnail != nil }
             })
             .store(in: &cancellables)
     }
 }
-
