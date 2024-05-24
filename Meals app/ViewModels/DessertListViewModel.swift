@@ -9,10 +9,15 @@ import Foundation
 import SwiftUI
 import Combine
 
+struct IdentifiableError: Identifiable {
+    let id = UUID() // Ensures each instance has a unique identifier
+    let message: String
+}
+
 class DessertListViewModel: ObservableObject {
     @Published var desserts: [Dessert] = []
     @Published var isLoading = false
-    @Published var errorMessage: String? = nil
+    @Published var errorMessage: IdentifiableError? = nil // Updated type
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -24,7 +29,7 @@ class DessertListViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 self.isLoading = false
                 if case .failure(let error) = completion {
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = IdentifiableError(message: error.localizedDescription) // Updated to use IdentifiableError
                 }
             }, receiveValue: { desserts in
                 self.desserts = desserts
@@ -32,3 +37,4 @@ class DessertListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 }
+
